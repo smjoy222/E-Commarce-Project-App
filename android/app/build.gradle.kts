@@ -36,7 +36,6 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
-
     buildFeatures {
         // Enable the BuildConfig feature
         buildConfig = true
@@ -44,5 +43,5 @@ android {
 }
 
 flutter {
-    source = "../.."  // Make sure this points to the correct Flutter project directory
+    source = "../.."  
 }

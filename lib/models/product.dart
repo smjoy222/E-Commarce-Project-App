@@ -1,3 +1,4 @@
+
 class Product {
   final String id;
   final String name;
@@ -12,14 +13,4 @@ class Product {
     required this.description,
     required this.price,
   });
-
-  factory Product.fromMap(Map<String, dynamic> data, String id) {
-    return Product(
-      id: id,
-      name: data['name'],
-      image: data['image'],
-      description: data['description'],
-      price: data['price'],
-    );
-  }
 }

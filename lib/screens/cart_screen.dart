@@ -13,9 +13,16 @@ class CartScreen extends StatelessWidget {
           : ListView.builder(
               itemCount: cartProvider.cartItems.length,
               itemBuilder: (context, index) {
+                final product = cartProvider.cartItems[index];
                 return ListTile(
-                  title: Text(cartProvider.cartItems[index].name),
-                  subtitle: Text('৳ ${cartProvider.cartItems[index].price}'),
+                  title: Text(product.name),
+                  subtitle: Text('৳ ${product.price}'),
+                  trailing: IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: () {
+                      cartProvider.removeFromCart(product);
+                    },
+                  ),
                 );
               },
             ),

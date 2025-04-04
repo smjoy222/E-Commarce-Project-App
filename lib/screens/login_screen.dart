@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'signup_screen.dart';
-import 'home_screen.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import 'signup_screen.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -17,14 +17,22 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(controller: emailController, decoration: InputDecoration(labelText: 'Email')),
-            TextField(controller: passwordController, obscureText: true, decoration: InputDecoration(labelText: 'Password')),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: InputDecoration(labelText: 'Password'),
+            ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 String result = await context.read<AuthProvider>().signIn(
-                      emailController.text,
-                      passwordController.text,
-                    );
+                  emailController.text,
+                  passwordController.text,
+                );
                 if (result == 'Signed In Successfully') {
                   Navigator.pushReplacement(
                     context,

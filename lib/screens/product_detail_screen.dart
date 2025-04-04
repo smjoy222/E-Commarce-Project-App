@@ -12,12 +12,14 @@ class ProductDetailScreen extends StatelessWidget {
       appBar: AppBar(title: Text(product.name)),
       body: Column(
         children: [
-          Image.network(product.image),
+          Image.asset(product.image),
           Text(product.name),
           Text(product.description),
           Text('Price: ৳ ${product.price}'),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Add product to cart
+            },
             child: Text('Add to Cart'),
           ),
         ],

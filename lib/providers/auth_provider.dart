@@ -1,30 +1,33 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // Dummy in-memory user storage for demonstration purposes
+  String? _user;
 
-  User? get user => _auth.currentUser;
+  String? get user => _user;
 
+  // Simulate sign up
   Future<String> signUp(String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      return 'Signed Up Successfully';
-    } catch (e) {
-      return e.toString();
-    }
+    // Normally, you would save this user info in local storage or a database
+    _user = email;  // For simplicity, use the email as the user ID
+    notifyListeners();
+    return 'Signed Up Successfully';
   }
 
+  // Simulate sign in
   Future<String> signIn(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    // Normally, you would verify the user info here (e.g., with a backend or local storage)
+    if (email.isNotEmpty && password.isNotEmpty) {
+      _user = email;  // Set the user when signed in
+      notifyListeners();
       return 'Signed In Successfully';
-    } catch (e) {
-      return e.toString();
     }
+    return 'Invalid Credentials';
   }
 
+  // Simulate sign out
   Future<void> signOut() async {
-    await _auth.signOut();
+    _user = null;  // Clear the current user
+    notifyListeners();
   }
 }

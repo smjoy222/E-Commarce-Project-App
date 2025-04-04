@@ -26,7 +26,7 @@ class UpdateProductScreen extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                await context.read<ProductProvider>().updateProductPrice(
+                context.read<ProductProvider>().updateProductPrice(
                   productIdController.text,
                   double.parse(priceController.text),
                 );

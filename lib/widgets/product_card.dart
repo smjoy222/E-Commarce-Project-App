@@ -19,7 +19,7 @@ class ProductCard extends StatelessWidget {
       child: Card(
         child: Column(
           children: [
-            Image.network(product.image),
+            Image.asset(product.image),
             Text(product.name),
             Text('৳ ${product.price}'),
           ],
