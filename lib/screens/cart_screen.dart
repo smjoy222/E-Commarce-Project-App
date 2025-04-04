@@ -1,26 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/cart_provider.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
+  @override
+  _CartScreenState createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  // Simulated in-memory cart items
+  List<Map<String, dynamic>> cartItems = [];
+  
+  // Simulate adding a product to the cart
+  void addToCart(Map<String, dynamic> product) {
+    setState(() {
+      cartItems.add(product);
+    });
+  }
+
+  // Simulate removing a product from the cart
+  void removeFromCart(Map<String, dynamic> product) {
+    setState(() {
+      cartItems.remove(product);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Cart')),
-      body: cartProvider.cartItems.isEmpty
+      body: cartItems.isEmpty
           ? Center(child: Text('Your cart is empty'))
           : ListView.builder(
-              itemCount: cartProvider.cartItems.length,
+              itemCount: cartItems.length,
               itemBuilder: (context, index) {
-                final product = cartProvider.cartItems[index];
                 return ListTile(
-                  title: Text(product.name),
-                  subtitle: Text('৳ ${product.price}'),
+                  title: Text(cartItems[index]['name']),
+                  subtitle: Text('৳ ${cartItems[index]['price']}'),
                   trailing: IconButton(
                     icon: Icon(Icons.remove),
                     onPressed: () {
-                      cartProvider.removeFromCart(product);
+                      removeFromCart(cartItems[index]);
                     },
                   ),
                 );
@@ -32,7 +50,7 @@ class CartScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total: ৳ ${cartProvider.totalAmount}'),
+              Text('Total: ৳ ${cartItems.fold(0, (sum, item) => sum + (item['price'] as int))}'),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Checkout'),
